@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 
 const NODE_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -15,6 +16,7 @@ async function auth() {
 function App() {
   return (
     <div className="App">
+      {NODE_BASE_URL}/test
       <button type="button" onClick={() => auth()}>
         Sign In with Google
       </button>
