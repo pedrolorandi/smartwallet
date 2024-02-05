@@ -16,7 +16,6 @@ async function auth() {
 function App() {
   return (
     <div className="App">
-      {NODE_BASE_URL}/test
       <button type="button" onClick={() => auth()}>
         Sign In with Google
       </button>
