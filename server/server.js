@@ -4,10 +4,16 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
+const MongoDBSession = require("connect-mongodb-session")(session);
 
 // Setting up the server
 const PORT = process.env.PORT;
 const app = express();
+
+const store = new MongoDBSession({
+  uri: process.env.ATLAS_URI,
+  collection: "sessions",
+});
 
 // Middlewares
 app.use(cors());
@@ -18,6 +24,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: store,
     cookie: {
       secure: false,
       httpOnly: true,
@@ -29,11 +36,9 @@ app.use(
 // Routes
 const authRouter = require("./routes/oauth");
 const requestRouter = require("./routes/request");
-const checkSessionRouter = require("./routes/checkSession");
 
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
-app.use("/check-session", checkSessionRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

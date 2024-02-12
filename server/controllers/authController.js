@@ -32,11 +32,7 @@ async function handleOAuthCallback(req, res) {
     };
 
     const user = await User.findOrCreate(userPayload);
-
-    req.session.userID = user.sub;
-
-    console.log("User created:\n", user);
-    console.log("Session created:\n", req.session);
+    req.session.isAuth = true;
   } catch (err) {
     console.log("Error with signing in with Google:", err);
   }
