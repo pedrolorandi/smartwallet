@@ -15,8 +15,13 @@ const store = new MongoDBSession({
   collection: "sessions",
 });
 
+const corsOptions = {
+  origin: process.env.REACT_BASE_URL,
+  credentials: true,
+};
+
 // Middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.text());
 app.use(
