@@ -1,3 +1,4 @@
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 
 import React from "react";
@@ -7,7 +8,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />}></Route>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
       </Routes>
     </Router>
   );
