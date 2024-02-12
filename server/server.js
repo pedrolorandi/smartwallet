@@ -29,9 +29,11 @@ app.use(
 // Routes
 const authRouter = require("./routes/oauth");
 const requestRouter = require("./routes/request");
+const checkSessionRouter = require("./routes/checkSession");
 
 app.use("/oauth", authRouter);
 app.use("/request", requestRouter);
+app.use("/check-session", checkSessionRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
