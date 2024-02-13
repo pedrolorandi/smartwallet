@@ -32,12 +32,14 @@ async function handleOAuthCallback(req, res) {
     };
 
     const user = await User.findOrCreate(userPayload);
-    console.log("User created:\n", user);
+    req.session.isAuth = true;
+    req.session.user = user;
+    req.session.save();
   } catch (err) {
     console.log("Error with signing in with Google:", err);
   }
 
-  res.redirect(303, REACT_BASE_URL);
+  res.redirect(303, `${REACT_BASE_URL}/dashboard`);
 }
 
 module.exports = { handleOAuthCallback };
