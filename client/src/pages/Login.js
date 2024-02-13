@@ -1,22 +1,11 @@
-import React from "react";
-import axios from "axios";
-
-const NODE_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
-// TODO: Move this function to a separate file
-function navigate(url) {
-  window.location.href = url;
-}
-
-async function auth() {
-  const response = await axios.post(`${NODE_BASE_URL}/request`);
-  navigate(response.data.url);
-}
+import { useAuth } from "../hooks/useAuth";
 
 function Login() {
+  const { login } = useAuth();
+
   return (
     <div className="App">
-      <button type="button" onClick={() => auth()}>
+      <button type="button" onClick={() => login()}>
         Sign In with Google
       </button>
     </div>
